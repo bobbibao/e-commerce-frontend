@@ -64,7 +64,7 @@ const OrderHistory = () => {
               >
                 <input type="radio" name="my-accordion-3" />
                 <div className="collapse-title text-xl font-medium text-accent-content">
-                  Đơn hàng {order.id} - {order.orderStatus} - {order.orderDate}
+                  Đơn hàng {order.id} - {order.orderStatus} - {new Date(order.orderDate).toLocaleString()}
                 </div>
                 <div className="collapse-content">
                   <div className="overflow-x-auto">

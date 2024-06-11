@@ -56,7 +56,7 @@ const FieldRow = (props) => {
         </Grid>
         <Grid item xs={7}>
           <Typography variant="subtitle1" gutterBottom style={{color: "rgb(234, 236, 239)"}}>
-            {props.value}aaaa
+              {props.label === 'Mật khẩu' ? '**********' : props.value}
           </Typography>
         </Grid>
         <Grid item xs={1}>

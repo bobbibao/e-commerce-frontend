@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, TextField, Container, Typography, Divider, Box, IconButton, Button } from '@material-ui/core';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
@@ -56,6 +56,7 @@ export default function FieldModal(props) {
       <><TextField
         id="outlined-name"
         label="Mật khẩu cũ"
+        type="password"
         className={classes.textfield}
         fullWidth
         multiline={props.variant === 'textarea'}
@@ -66,6 +67,7 @@ export default function FieldModal(props) {
         variant="outlined" /><TextField
           id="outlined-name"
           label="Mật khẩu mới"
+          type="password"
           className={classes.textfield}
           fullWidth
           multiline={props.variant === 'textarea'}
@@ -76,6 +78,7 @@ export default function FieldModal(props) {
           variant="outlined" /><TextField
           id="outlined-name"
           label="Nhập lại mật khẩu mới"
+          type="password"
           className={classes.textfield}
           fullWidth
           multiline={props.variant === 'textarea'}
