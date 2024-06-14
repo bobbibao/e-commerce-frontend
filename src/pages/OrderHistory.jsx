@@ -21,7 +21,7 @@ const OrderHistory = () => {
       // setOrders(
       //   data.filter((order) => order.userId === localStorage.getItem("id"))
       // );
-      const response = await axios.get(`http://localhost:8080/orders/${localStorage.getItem("id")}`);
+      const response = await axios.get(`http://localhost:8080/orders/user/${localStorage.getItem("id")}`);
       console.log(response);
       const data = response.data;
       setOrders(data);

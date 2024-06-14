@@ -46,6 +46,7 @@ const SingleProduct = () => {
   ]);
 
   const { productData } = useLoaderData();
+  console.log(productData);
 
   const [size, setSize] = useState(productData?.availableSizes[0]);
   const product = {
@@ -54,7 +55,7 @@ const SingleProduct = () => {
     title: productData?.name,
     image: productData?.imageUrl,
     rating: productData?.rating,
-    price: productData?.price?.current?.value,
+    price: productData?.price,
     brandName: productData?.brandName,
     amount: quantity,
     selectedSize: size,
@@ -156,7 +157,8 @@ const SingleProduct = () => {
           </h2>
           <SingleProductRating rating={rating} productData={productData} />
           <p className="text-3xl text-error">
-            ${productData?.price?.current?.value}
+            {/* ${productData?.price?.current?.value} */}
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productData.price)}
           </p>
           <div className="text-xl max-sm:text-lg text-accent-content">
             {parse(productData?.description)}

@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 const CartTotals = () => {
   const { amount } = useSelector((state) => state.cart);
   const { total } = useSelector((state) => state.cart);
-  const tax = total / 5;
-  const shipping = 50;
+  const tax = total / 10;
+  const shipping = 10000;
   return (
     <div className='card bg-base-200'>
       <div className='card-body'>
@@ -21,7 +21,7 @@ const CartTotals = () => {
         </p>
         {/* Tax */}
         <p className='flex justify-between text-xs border-b border-base-300 pb-2 text-accent-content'>
-          <span>Thuế 20%</span>
+          <span>Thuế 10%</span>
           <span className='font-medium'>{Math.round(tax)}</span>
         </p>
         {/* Order Total */}
