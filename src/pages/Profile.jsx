@@ -256,6 +256,44 @@ const Profile2 = (props) => {
       toast.error("Error: ", error.response);
     }
   };
+  const handleUpdateField = async (label, value) => {
+    try {
+      console.log("userFormData: ", userFormData);
+      switch (label) {
+        case "Họ":
+          userFormData.lastname = value;
+          break;
+        case "Tên":
+          userFormData.name = value;
+          break;
+        case "Số điện thoại":
+          userFormData.phone = value;
+          break;
+        case "Địa chỉ":
+          userFormData.adress = value;
+          break;
+        case "Mật khẩu":
+          userFormData.password = value;
+          break;
+        default:
+          break;
+      }
+      const response = await axios.put(`http://localhost:8080/user/${id}`, {
+        id: id,
+        name: userFormData.name,
+        lastname: userFormData.lastname,
+        email: userFormData.email,
+        phone: userFormData.phone,
+        adress: userFormData.adress,
+        password: userFormData.password,
+      });
+      const data = response.data;
+      handleClose();
+      toast.success("Cập nhật thông tin cá nhân thành công");
+    } catch (error) {
+      toast.error("Error: ", error.response);
+    }
+  }
 
   useEffect(() => {
     if (loginState) {
@@ -291,6 +329,7 @@ const Profile2 = (props) => {
       open: false
     });
   }
+  
 
   return (
     <Container className={classes.container}>
@@ -331,7 +370,7 @@ const Profile2 = (props) => {
         }}
       >
         <div style={{ outline: 'none' }}>
-          <FieldModal label={fieldModal.field.label} value={fieldModal?.field?.value} onClose={handleClose} item={props?.item || null} setProduct={props?.setProduct} />
+          <FieldModal onSave={handleUpdateField}label={fieldModal.field.label} value={fieldModal?.field?.value} onClose={handleClose}/>
         </div>
       </Modal>
 
