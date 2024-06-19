@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [name, setName] = useState("");
@@ -22,17 +22,17 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/send-otp", {
+      const response = await fetch(`http://localhost:8080/user/submit-email?email=${email}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
       });
 
+      console.log(response);
       if (response.ok) {
-        toast.success("OTP sent to your email.");
+        toast.success("Mã OTP đã được gửi tới email của bạn.");
         setStep(2);
       } else {
-        toast.error("Failed to send OTP. Please try again.");
+        toast.error("Email đã tồn tại.");
       }
     } catch (error) {
       toast.error("Error: " + error.message);
@@ -42,12 +42,16 @@ const Register = () => {
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
 
+    const id = nanoid();
     try {
-      const response = await fetch("http://localhost:8080/verify-otp", {
+      const response = await fetch(`http://localhost:8080/user/verify-otp?email=${email}&otp=${otp}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
+        body: JSON.stringify({ 
+          id
+         }),
       });
+      console.log(response);
 
       if (response.ok) {
         toast.success("OTP verified. Please fill in the registration details.");
@@ -101,7 +105,6 @@ const Register = () => {
     e.preventDefault();
 
     let regObj = {
-      id: nanoid(),
       name,
       lastname,
       email,
