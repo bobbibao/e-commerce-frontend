@@ -14,7 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [adress, setAddress] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,14 +42,11 @@ const Register = () => {
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
 
-    const id = nanoid();
     try {
       const response = await fetch(`http://localhost:8080/user/verify-otp?email=${email}&otp=${otp}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          id
-         }),
+        // body: JSON.stringify({ email, otp }),
       });
       console.log(response);
 
@@ -105,12 +102,13 @@ const Register = () => {
     e.preventDefault();
 
     let regObj = {
+      id: nanoid(),
       name,
       lastname,
       email,
       gender,
       phone,
-      address,
+      adress,
       password,
       userWishlist: [],
     };
@@ -213,9 +211,9 @@ const Register = () => {
                   required={true}
                 >
                   <option value="">Chọn giới tính</option>
-                  <option value="Male">Nam</option>
-                  <option value="Female">Nữ</option>
-                  <option value="Other">Khác</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                  {/* <option value="Other">Khác</option> */}
                 </select>
                 <label className="font-semibold text-sm pb-1 block text-accent-content">
                   Số điện thoại
@@ -233,7 +231,7 @@ const Register = () => {
                 <input
                   type="text"
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                  value={address}
+                  value={adress}
                   onChange={(e) => setAddress(e.target.value)}
                   required={true}
                 />
