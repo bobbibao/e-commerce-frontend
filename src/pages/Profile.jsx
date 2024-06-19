@@ -244,9 +244,11 @@ const Profile2 = (props) => {
     try {
       const response = await axios(`http://localhost:8080/user/${id}`);
       const data = response.data;
+      console.log(data);
       setUserFormData({
         name: data.name,
         lastname: data.lastname,
+        gender: data.gender,
         email: data.email,
         phone: data.phone,
         adress: data.adress,
@@ -282,6 +284,7 @@ const Profile2 = (props) => {
         id: id,
         name: userFormData.name,
         lastname: userFormData.lastname,
+        gender: userFormData.gender,
         email: userFormData.email,
         phone: userFormData.phone,
         adress: userFormData.adress,

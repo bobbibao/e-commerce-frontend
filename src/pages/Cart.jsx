@@ -14,7 +14,10 @@ const Cart = () => {
     if(cartItems.length === 0){
       toast.error("Giỏ hàng đang trống");
     }else{
-      navigate("/thank-you");
+      const confirmOrder = window.confirm("Bạn có chắc chắn muốn đặt hàng không?");
+      if(confirmOrder){
+        navigate("/thank-you");
+      }
     }
   }
 
