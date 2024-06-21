@@ -7,14 +7,14 @@ import axios from "axios";
 export const landingLoader = async () => {
   try{
     const response = await axios(
-      `http://localhost:8080/products?_page=1&_limit=8`
+      `http://localhost:8080/products`
     );
     const data = response.data;
 
-    return { products: data };
+    return { products: data.filter((product) => product.featured).slice(0, 8) };
   }catch(err){
-    return { products: [] };
     console.log(err);
+    return { products: [] };
   }
 };
 
