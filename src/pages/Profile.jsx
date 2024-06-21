@@ -96,7 +96,7 @@ const Profile = () => {
     if (loginState) {
       getUserData();
     } else {
-      toast.error("You must be logged in to access this page");
+      toast.error("Bạn cần đăng nhập để truy cập trang này");
       navigate("/");
     }
   }, []);
@@ -302,7 +302,7 @@ const Profile2 = (props) => {
     if (loginState) {
       getUserData();
     } else {
-      toast.error("You must be logged in to access this page");
+      toast.error("Bạn cần đăng nhập để truy cập trang này");
       navigate("/");
     }
   }, []);
