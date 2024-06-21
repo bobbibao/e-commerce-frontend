@@ -9,7 +9,7 @@ const Wishlist = () => {
   return (
     <div style={{flexGrow: 1}}>
       <SectionTitle title="Wishlist" path="Home | Wishlist" />
-      <div className="max-w-7xl mx-auto px-20 py-10">
+      <div className="max-w-7xl mx-auto px-20 py-10" style={{paddingLeft: "15rem"}}>
         <div className="overflow-x-auto">
           <table className="table">
             <thead>

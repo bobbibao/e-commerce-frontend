@@ -86,6 +86,12 @@ const Header = () => {
             <NavLink className="text-accent-content navlink-hover" to="/shop" style={{padding: 10}}>
               Sản phẩm
             </NavLink>
+            <NavLink className="text-accent-content navlink-hover" to="/about-us" style={{padding: 10}}>
+              Về chúng tôi
+            </NavLink>
+            <NavLink className="text-accent-content navlink-hover" to="/contact" style={{padding: 10}}>
+              Liên hệ
+            </NavLink>
           </div>
         </div>
         <div className="flex-none ">

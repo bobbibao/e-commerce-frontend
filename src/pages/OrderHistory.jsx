@@ -32,13 +32,18 @@ const OrderHistory = () => {
 
   useEffect(() => {
     if (!loginState) {
-      toast.error("You must be logged in to access this page");
+      toast.error("Bạn cần đăng nhập để xem lịch sử đơn hàng");
       navigate("/");
     } else {
       getOrderHistory();
     }
   }, []);
-
+  const formatCurrency = (value) => {
+    return value.toLocaleString("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    });
+};
   return (
     <div style={{flexGrow: 1}}>
       <SectionTitle title="Order History" path="Home | Order History" />
@@ -88,34 +93,34 @@ const OrderHistory = () => {
                             <td>{product.title}</td>
                             <td>{product.selectedSize}</td>
                             <td>{product.amount}</td>
-                            <td>VNĐ{(product.price * product.amount).toFixed(2)}</td>
+                            <td>{formatCurrency((product.price * product.amount).toFixed(2))}</td>
                           </tr>
                         ))}
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h4 className="text-md text-accent-content">
-                              Tổng tiền hàng: VNĐ{ Math.round(order?.subtotal) }
+                              Tổng tiền hàng: { formatCurrency(Math.round(order?.subtotal)) }
                             </h4>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Phí giao hàng: VNĐ20.000
+                              Phí giao hàng: 10.000 đ
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Thuế: 20%: VNĐ{ Math.round(order?.subtotal / 5) }
+                              Thuế: 10%: { formatCurrency(Math.round(order?.subtotal / 10)) }
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-xl text-accent-content">
-                              - Tổng cần thanh toán: VNĐ{ Math.round(order?.subtotal + 50 + (order?.subtotal / 5)) } -
+                              - Tổng cần thanh toán: { formatCurrency(Math.round(order?.subtotal + 10000 + (order?.subtotal / 10))) } -
                             </h3>
                           </td>
                         </tr>
