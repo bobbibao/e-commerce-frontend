@@ -20,7 +20,7 @@ const Register = () => {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(nanoid());
     try {
       const response = await fetch(`http://localhost:8080/user/submit-email?email=${email}`, {
         method: "POST",
@@ -51,7 +51,7 @@ const Register = () => {
       console.log(response);
 
       if (response.ok) {
-        toast.success("OTP verified. Please fill in the registration details.");
+        toast.success("OTP đã hợp lệ. Hãy điền thông tin đăng ký.");
         setStep(3);
       } else {
         toast.error("Invalid OTP. Please try again.");
@@ -77,7 +77,7 @@ const Register = () => {
     } else if (phone.length < 4) {
       isProceed = false;
       errorMessage = "Phone must be longer than 3 characters";
-    } else if (address.length < 4) {
+    } else if (adress.length < 4) {
       isProceed = false;
       errorMessage = "Address must be longer than 3 characters";
     } else if (password.length < 6) {
