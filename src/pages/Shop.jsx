@@ -53,7 +53,7 @@ export const shopLoader = async ({ request }) => {
 
   try {
     const response = await axios(
-      `http://localhost:8080/products${parameter}`
+      `http://localhost:8080/products?_page=${filterObj.current_page}&_limit=20`
 
     );
     let data = response.data;

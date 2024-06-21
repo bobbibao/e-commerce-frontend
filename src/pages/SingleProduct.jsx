@@ -189,7 +189,7 @@ const SingleProduct = () => {
                   dispatch(addToCart(product));
                 } else {
                   toast.error(
-                    "You must be logged in to add products to the cart"
+                    "Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng"
                   );
                 }
               }}
@@ -207,7 +207,7 @@ const SingleProduct = () => {
                     removeFromWishlistHandler(product);
                   } else {
                     toast.error(
-                      "You must be logged in to remove products from the wishlist"
+                      "Bạn phải đăng nhập để xoá sản phẩm khỏi danh sách yêu thích"
                     );
                   }
                 }}
@@ -224,7 +224,7 @@ const SingleProduct = () => {
                     addToWishlistHandler(product);
                   } else {
                     toast.error(
-                      "You must be logged in to add products to the wishlist"
+                      "Bạn phải đăng nhập để thêm sản phẩm vào danh sách yêu thích"
                     );
                   }
                 }}
@@ -248,7 +248,7 @@ const SingleProduct = () => {
                   : "badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2"
               }
             >
-              Còn hàng: {productData?.isInStock ? "Yes" : "No"}
+              Còn hàng: {productData?.isInStock ? "Yes" : "Yes"}
             </div>
             <div className="badge bg-gray-700 badge-lg font-bold text-white p-5 mt-2">
               SKU: {productData?.productCode}
