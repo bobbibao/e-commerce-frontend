@@ -5,10 +5,13 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store";
 import { loginUser, logoutUser } from "../features/auth/authSlice";
+import { GoogleLogin } from 'react-google-login';
 
+  const CLIENT_ID = '429897939884-mgl80q7jld0nq598s0s9a28sund1ofdl.apps.googleusercontent.com';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.auth.isLoggedIn);
@@ -90,6 +93,23 @@ const Login = () => {
     }
   };
 
+  const handleLoginSuccess = (response) => {
+    console.log('Login Success:', response);
+    
+  };
+
+  const handleLoginFailure = (response) => {
+  console.log('Login Failed:', response);
+  if (response.error === "popup_closed_by_user") {
+    // Inform the user that the login process was not completed.
+    toast.warn("Đăng nhập không hoàn tất. Vui lòng thử lại.");
+  } else {
+    // Handle other types of login failures.
+    toast.error("Đăng nhập thất bại. Vui lòng thử lại sau.");
+  }
+  
+};
+
   return (
     <div style={{flexGrow: 1}}>
       <SectionTitle title="Login" path="Home | Login" />
@@ -140,6 +160,14 @@ const Login = () => {
             </form>
           </div>
           <div className="py-5 text-center">
+          <GoogleLogin
+        clientId={CLIENT_ID}
+        buttonText="Login with Google"
+        onSuccess={handleLoginSuccess}
+        onFailure={handleLoginFailure}
+        cookiePolicy={'single_host_origin'}
+        isSignedIn={true} // Tự động đăng nhập người dùng nếu họ đã đăng nhập trước đó
+      />
             <Link
               to="/register"
               className="btn btn-neutral text-white"
