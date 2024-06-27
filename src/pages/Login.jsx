@@ -7,7 +7,6 @@ import { store } from "../store";
 import { loginUser, logoutUser } from "../features/auth/authSlice";
 import { GoogleLogin } from 'react-google-login';
 
-  const CLIENT_ID = '429897939884-mgl80q7jld0nq598s0s9a28sund1ofdl.apps.googleusercontent.com';
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -161,11 +160,13 @@ const Login = () => {
           </div>
           <div className="py-5 text-center">
           <GoogleLogin
-        clientId={CLIENT_ID}
+        clientId={"429897939884-dg83gmcgcikr0u80p5jgs8d0884ip32o.apps.googleusercontent.com"}
         buttonText="Login with Google"
         onSuccess={handleLoginSuccess}
         onFailure={handleLoginFailure}
-        cookiePolicy={'single_host_origin'}
+        cookiePolicy={
+          "single_host_origin"
+        }
         isSignedIn={true} // Tự động đăng nhập người dùng nếu họ đã đăng nhập trước đó
       />
             <Link

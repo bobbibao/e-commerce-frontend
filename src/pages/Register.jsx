@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [name, setName] = useState("");
