@@ -16,12 +16,29 @@ const ThankYou = () => {
 
   const saveToOrderHistory = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/orders", {
-        userId: localStorage.getItem("id"),
-        orderStatus: "in process",
-        subtotal: total,
-        cartItems: cartItems,
+      axios.get('http://localhost:8080/api/payment/create-payment', {
+        params: {
+          amount: 100000 // số tiền thanh toán, đơn vị VND
+        }
+        
+      })
+      .then(response => {
+        if (response.data.code === '00') {
+          window.location.href = response.data.data; // Chuyển hướng người dùng đến URL thanh toán của VNPAY
+        } else {
+          alert('Có lỗi xảy ra. Vui lòng thử lại.');
+        }
+      })
+      .catch(error => {
+        console.error('Có lỗi xảy ra:', error);
+        alert('Có lỗi xảy ra. Vui lòng thử lại.');
       });
+      // const response = await axios.post("http://localhost:8080/orders", {
+      //   userId: localStorage.getItem("id"),
+      //   orderStatus: "in process",
+      //   subtotal: total,
+      //   cartItems: cartItems,
+      // });
     } catch (err) {
       toast.error(err.response);
     }
