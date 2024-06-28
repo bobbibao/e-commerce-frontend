@@ -164,7 +164,7 @@ const Header = () => {
                   {amount} Sản phẩm
                 </span>
                 <span className="text-info text-accent-content">
-                  Tổng tiền: VNĐ{total.toFixed(2)}
+                  Tổng tiền:  {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)}
                 </span>
                 <div className="card-actions">
                   <Link

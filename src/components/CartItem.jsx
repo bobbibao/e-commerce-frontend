@@ -55,7 +55,7 @@ const CartItem = ({ cartItem }) => {
       </div>
 
       {/* PRICE */}
-      <p className="font-medium sm:ml-auto text-accent-content">VNĐ{ (price * amount).toFixed(2) }</p>
+      <p className="font-medium sm:ml-auto text-accent-content"> {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price * amount)}</p>
     </article>
   );
 };
