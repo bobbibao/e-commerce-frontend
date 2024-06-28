@@ -185,13 +185,13 @@ const SingleProduct = () => {
               className="btn bg-blue-600 hover:bg-blue-500 text-white"
               style={{ color: "rgb(32, 38, 48)", backgroundColor: "rgb(252, 213, 53)"}}
               onClick={() => {
-                if (loginState) {
+                // if (loginState) {
                   dispatch(addToCart(product));
-                } else {
-                  toast.error(
-                    "Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng"
-                  );
-                }
+                // } else {
+                //   toast.error(
+                //     "Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng"
+                //   );
+                // }
               }}
             >
               <FaCartShopping className="text-xl mr-1" />
