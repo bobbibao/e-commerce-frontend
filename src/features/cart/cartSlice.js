@@ -45,7 +45,7 @@ const cartSlice = createSlice({
                 cartItem.amount += action.payload.amount;
             }
             cartSlice.caseReducers.calculateTotals(state);
-            toast.success('Product added to the cart!');
+            toast.success('Sản phẩm đã được thêm vào giỏ hàng!');
 
         }
     }

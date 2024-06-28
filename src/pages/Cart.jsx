@@ -63,6 +63,7 @@ const Cart = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('cod');
   const [coupon, setCoupon] = useState(null);
+  const { total } = useSelector((state) => state.cart);
 
   const onFocus = () => {
     setIsFocused(true);
@@ -106,7 +107,34 @@ const Cart = () => {
     } else {
       const confirmOrder = window.confirm('Bạn có chắc chắn muốn đặt hàng không?');
       if (confirmOrder) {
-        navigate('/thank-you');
+        try {
+          axios.get('http://localhost:8080/api/payment/create-payment', {
+            params: {
+              amount: total // số tiền thanh toán, đơn vị VND
+            }
+            
+          })
+          .then(response => {
+            if (response.data.code === '00') {
+              window.location.href = response.data.data; // Chuyển hướng người dùng đến URL thanh toán của VNPAY
+            } else {
+              alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+          })
+          .catch(error => {
+            console.error('Có lỗi xảy ra:', error);
+            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+          });
+          // const response = await axios.post("http://localhost:8080/orders", {
+          //   userId: localStorage.getItem("id"),
+          //   orderStatus: "in process",
+          //   subtotal: total,
+          //   cartItems: cartItems,
+          // });
+        } catch (err) {
+          toast.error(err.response);
+        }
+        // navigate('/thank-you');
       }
     }
   };

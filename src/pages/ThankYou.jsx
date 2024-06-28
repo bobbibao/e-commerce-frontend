@@ -18,7 +18,7 @@ const ThankYou = () => {
     try {
       axios.get('http://localhost:8080/api/payment/create-payment', {
         params: {
-          amount: 100000 // số tiền thanh toán, đơn vị VND
+          amount: total // số tiền thanh toán, đơn vị VND
         }
         
       })
