@@ -18,7 +18,7 @@ const Footer = () => {
       </nav>
       <aside>
         <p className="text-1 max-sm:text-sm text-accent-content text-right">
-          Copyright © 2023 - A part of right reserved by Kuzma Clothing & Shoes
+         Partially derived from Kuzma Clothing & Shoes, reimagined by BobbiBao © 2024
         </p>
       </aside>
     </footer>
