@@ -16,23 +16,24 @@ const ThankYou = () => {
 
   const saveToOrderHistory = async () => {
     try {
-      axios.get('http://localhost:8080/api/payment/create-payment', {
-        params: {
-          amount: total // số tiền thanh toán, đơn vị VND
-        }
+      // axios.get('http://localhost:8080/api/payment/create-payment', {
+      //   params: {
+      //     amount: total // số tiền thanh toán, đơn vị VND
+      //   }
         
-      })
-      .then(response => {
-        if (response.data.code === '00') {
-          window.location.href = response.data.data; // Chuyển hướng người dùng đến URL thanh toán của VNPAY
-        } else {
-          alert('Có lỗi xảy ra. Vui lòng thử lại.');
-        }
-      })
-      .catch(error => {
-        console.error('Có lỗi xảy ra:', error);
-        alert('Có lỗi xảy ra. Vui lòng thử lại.');
-      });
+      // })
+      // .then(response => {
+      //   if (response.data.code === '00') {
+      //     window.location.href = response.data.data; // Chuyển hướng người dùng đến URL thanh toán của VNPAY
+      //   } else {
+      //     alert('Có lỗi xảy ra. Vui lòng thử lại.');
+      //   }
+      // })
+      // .catch(error => {
+      //   console.error('Có lỗi xảy ra:', error);
+      //   alert('Có lỗi xảy ra. Vui lòng thử lại.');
+      // });
+      console.log("cartItems", coupon);
       // const response = await axios.post("http://localhost:8080/orders", {
       //   userId: localStorage.getItem("id"),
       //   orderStatus: "in process",
@@ -48,7 +49,7 @@ const ThankYou = () => {
     saveToOrderHistory();
     store.dispatch(clearCart());
     store.dispatch(calculateTotals());
-    toast.success("Đặt Hàng Thành Công");
+    // toast.success("Đặt Hàng Thành Công");
   }
 
   useEffect(() => {

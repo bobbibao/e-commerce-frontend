@@ -248,7 +248,7 @@ const Profile2 = (props) => {
       setUserFormData({
         name: data.name,
         lastname: data.lastname,
-        gender: data.gender,
+        gender: data.gender === 'M' ? 'Nam' : 'Nữ',
         email: data.email,
         phone: data.phone,
         adress: data.adress,

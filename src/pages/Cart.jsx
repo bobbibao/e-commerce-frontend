@@ -106,16 +106,18 @@ const Cart = () => {
       toast.error('Giỏ hàng đang trống');
     } else {
       const confirmOrder = window.confirm('Bạn có chắc chắn muốn đặt hàng không?');
-      if (confirmOrder) {
+      if (confirmOrder && loginState && paymentMethod === 'vnpay') {
         try {
           axios.get('http://localhost:8080/api/payment/create-payment', {
             params: {
-              amount: total // số tiền thanh toán, đơn vị VND
+              amount: total - (coupon ? total * coupon.value / 100 : 0)
             }
             
           })
           .then(response => {
+            console.log(response);
             if (response.data.code === '00') {
+              window.confirm('Bạn có chắc chắn muốn thanh toán không?', response.data.data);
               window.location.href = response.data.data; // Chuyển hướng người dùng đến URL thanh toán của VNPAY
             } else {
               alert('Có lỗi xảy ra. Vui lòng thử lại.');
@@ -135,9 +137,30 @@ const Cart = () => {
           toast.error(err.response);
         }
         // navigate('/thank-you');
+      } else {
+        try {
+          axios.post("http://localhost:8080/orders", {
+            userId: localStorage.getItem("id"),
+            orderStatus: "in process",
+            subtotal: total - (coupon ? total * coupon.value / 100 : 0),
+            cartItems: cartItems,
+            couponCode: coupon.code
+          })
+          .then(response => {
+            toast.success("Đặt hàng thành công");
+            navigate('/thank-you');
+          })
+          .catch(err => {
+            toast.error(err.response);
+          });
+        } catch (err) {
+          toast.error(err.response);
+        }
+        // navigate('/thank-you');
       }
     }
   };
+
   
   return (
     <div style={{ flexGrow: 1 }}>
@@ -183,7 +206,7 @@ const Cart = () => {
                 control={<Radio style={{ color: 'white' }} />}
                 label="Thanh toán bằng ví điện tử VNPAY"
                 style={{
-                  opacity: 0.6,
+                  opacity: paymentMethod === 'vnpay' ? 1 : 0.6,
                   border: paymentMethod === 'vnpay' ? '1px solid rgb(252, 213, 53)' : '1px solid rgb(99, 93, 93)',
                   borderRadius: '5px',
                   padding: 3,
@@ -195,7 +218,7 @@ const Cart = () => {
                 control={<Radio style={{ color: 'white' }} />}
                 label="Thanh toán khi nhận hàng"
                 style={{
-                  opacity: 0.6,
+                  opacity: paymentMethod === 'cod' ? 1 : 0.6,
                   border: paymentMethod === 'cod' ? '1px solid rgb(252, 213, 53)' : '1px solid rgb(99, 93, 93)',
                   borderRadius: '5px',
                   padding: 3,

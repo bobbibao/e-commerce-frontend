@@ -11,6 +11,7 @@ const OrderHistory = () => {
   const loginState = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
+  const [coupon, setCoupon] = useState({});
 
   const getOrderHistory = async () => {
     try {
@@ -106,21 +107,21 @@ const OrderHistory = () => {
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Phí giao hàng: 10.000 đ
+                              Phí giao hàng: miễn phí
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-md text-accent-content">
-                              Thuế: 10%: { formatCurrency(Math.round(order?.subtotal / 10)) }
+                              Giảm giá: { order?.couponCode && formatCurrency(Math.round(order?.subtotal / 10)) } {order?.couponCode && `(${order?.couponCode})` || "Chưa áp dụng"}
                             </h3>
                           </td>
                         </tr>
                         <tr>
                           <td colSpan="5" className="text-center">
                             <h3 className="text-xl text-accent-content">
-                              - Tổng cần thanh toán: { formatCurrency(Math.round(order?.subtotal + 10000 + (order?.subtotal / 10))) } -
+                              - Tổng cần thanh toán: { formatCurrency(Math.round(order?.subtotal + 10000 - (order?.subtotal / 10))) } -
                             </h3>
                           </td>
                         </tr>
